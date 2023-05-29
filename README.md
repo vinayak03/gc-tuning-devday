@@ -4,3 +4,8 @@ This repo contains the setup code used to showcase during the devday for GC tuni
 
 
 
+To build the image,
+
+```
+ ./gradlew dockerBuildImage
+```
