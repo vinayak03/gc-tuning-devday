@@ -1,0 +1,21 @@
+---
+version: '3.7'
+services:
+  app:
+    image: 'org.sahaj/parking-lot'
+    ports:
+      - "8080:8080"
+      - "9010:9010"
+      - "9999:9999"
+    restart: on-failure
+    volumes: 
+    - ./dumps:/dumps
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+    environment:
+      JAVA_TOOL_OPTIONS: "-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps -XX:+ExitOnOutOfMemoryError -XX:+PrintFlagsFinal -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.rmi.port=9999 -Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote.local.only=false"
+      GENERATE_GARBAGE: false
+      DELAY: 500
